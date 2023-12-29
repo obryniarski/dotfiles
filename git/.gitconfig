@@ -1,0 +1,10 @@
+[user]
+	email = obryniarski@berkeley.edu
+	name = Oliver
+[core]
+	editor = vim
+[alias]
+	cm = commit -m
+	co = checkout
+[init]
+	defaultBranch = main

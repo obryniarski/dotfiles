@@ -8,7 +8,7 @@ fi
 chsh -s $(which zsh)
 
 # install oh-my-zsh
-if [ ! -d ~/.oh-my-zsh ]; then
+if [ ! -d $HOME/.oh-my-zsh ]; then
     echo "Installing oh-my-zsh"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
@@ -89,9 +89,9 @@ if test ! $(which nvim); then
 fi
 
 # nvchad nvim setup
-if [ ! -d ~/.config/nvim ]; then
+if [ ! -d $HOME/.config/nvim ]; then
   echo "Installing nvchad"
-  git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1
+  git clone https://github.com/NvChad/NvChad $HOME/.config/nvim --depth 1
 fi
 
 # stow dotfiles
@@ -100,7 +100,7 @@ if test ! $(which stow); then
   sudo apt-get -y install stow
 fi
 
-stow -v -t ~ git
-stow -v -t ~ zsh
-stow -v -t ~ p10k
-stow -v -t ~/.config/nvim/lua/custom nvim
+stow -v -t $HOME git
+stow -v -t $HOME zsh
+stow -v -t $HOME p10k
+stow -v -t $HOME/.config/nvim/lua/custom nvim

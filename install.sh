@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # install required packages
 sudo apt-get update
 sudo apt-get -y install curl libfuse2
@@ -14,7 +13,7 @@ fi
 # install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
     echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
 fi
 
 # check if MesloLGS NF is installed

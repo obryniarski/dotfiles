@@ -22,7 +22,10 @@ export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LS_COLORS="$(vivid generate one-dark)"
 
-# New Terminial Init
+# New Terminial Init (placed in .gitignore, custom for each pc)
+if [ -f startup.sh ]; then
+  source startup.sh
+fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

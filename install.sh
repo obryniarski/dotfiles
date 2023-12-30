@@ -3,7 +3,7 @@
 # install zsh
 if test ! $(which zsh); then
     echo "Installing zsh"
-    sudo apt install zsh
+    sudo apt -y install zsh
 fi
 chsh -s $(which zsh)
 

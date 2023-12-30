@@ -77,11 +77,11 @@ fi
 
 # install node (required for copilot in neovim)
 if test ! $(which node); then
-  echo $sudoPW | sudo -S apt-get clean
   echo $sudoPW | sudo -S apt-get install -y ca-certificates gnupg
   echo $sudoPW | sudo -S mkdir -p /etc/apt/keyrings
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpgA
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
   echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+  echo $sudoPW | sudo -S apt-get update
   echo $sudoPW | sudo -S apt-get install -y nodejs
 fi
 
@@ -91,13 +91,13 @@ if test ! $(which nvim); then
     wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     echo $sudoPW | sudo -S mv nvim.appimage /usr/local/bin/nvim
     chmod +x /usr/local/bin/nvim
-    mkdir $HOME/.config/nvim/lua/custom
 fi
 
 # nvchad nvim setup
 if [ ! -d $HOME/.config/nvim ]; then
   echo "Installing nvchad"
   git clone https://github.com/NvChad/NvChad $HOME/.config/nvim --depth 1
+  mkdir $HOME/.config/nvim/lua/custom
 fi
 
 if test ! $(which stow); then

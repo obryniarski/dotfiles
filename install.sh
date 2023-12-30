@@ -26,8 +26,8 @@ if [ ! -d /usr/share/fonts/MesloLGS ]; then
   wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
   wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 
-  mkdir /usr/share/fonts/MesloLGS
-  mv *.ttf /usr/share/fonts/MesloLGS
+  echo $sudoPW | sudo -S mkdir /usr/share/fonts/MesloLGS
+  echo $sudoPW | sudo -S mv *.ttf /usr/share/fonts/MesloLGS
   fc-cache -f -v
   rm -rf *Meslo*
 fi

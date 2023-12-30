@@ -110,3 +110,4 @@ stow -v -t $HOME p10k
 stow -v -t $HOME/.config/nvim/lua/custom nvim
 
 chsh -s $(which zsh)
+source $HOME/.zshrc

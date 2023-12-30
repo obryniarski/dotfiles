@@ -91,7 +91,7 @@ if test ! $(which nvim); then
     wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     echo $sudoPW | sudo -S mv nvim.appimage /usr/local/bin/nvim
     chmod +x /usr/local/bin/nvim
-    mkdir $HOME/.config.nvim/lua/custom
+    mkdir $HOME/.config/nvim/lua/custom
 fi
 
 # nvchad nvim setup

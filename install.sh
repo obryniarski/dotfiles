@@ -1,5 +1,10 @@
 #!/bin/bash
 
+
+# install required packages
+sudo apt-get update
+sudo apt-get -y install curl libfuse2
+
 # install zsh
 if test ! $(which zsh); then
     echo "Installing zsh"

@@ -8,3 +8,4 @@ cd ~/.dotfiles
 chmod u+x install.sh
 ./install.sh
 ```
+then log out and log back in. When you log back in, everything should be ready to go!

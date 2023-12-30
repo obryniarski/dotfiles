@@ -15,7 +15,7 @@ fi
 # install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
     echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 # check if MesloLGS NF is installed
@@ -99,7 +99,6 @@ if [ ! -d $HOME/.config/nvim ]; then
   git clone https://github.com/NvChad/NvChad $HOME/.config/nvim --depth 1
 fi
 
-# stow dotfiles
 if test ! $(which stow); then
   echo "Installing stow"
   echo $sudoPW | sudo -S apt-get -y install stow
@@ -111,10 +110,10 @@ rm -rf $HOME/.zshrc
 rm -rf $HOME/.p10k.zsh
 rm -rf $HOME/.config/nvim/lua/custom/*
 
+# stow dotfiles
 stow -v -t $HOME git
 stow -v -t $HOME zsh
 stow -v -t $HOME p10k
 stow -v -t $HOME/.config/nvim/lua/custom nvim
 
 chsh -s $(which zsh)
-source $HOME/.zshrc

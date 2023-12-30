@@ -89,7 +89,7 @@ fi
 if test ! $(which nvim); then
     echo "Installing nvim"
     wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    mv nvim.appimage /usr/local/bin/nvim
+    echo $sudoPW | sudo -S mv nvim.appimage /usr/local/bin/nvim
     chmod +x /usr/local/bin/nvim
     mkdir $HOME/.config.nvim/lua/custom
 fi

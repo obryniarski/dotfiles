@@ -10,12 +10,11 @@ if test ! $(which zsh); then
     echo "Installing zsh"
     sudo apt -y install zsh
 fi
-chsh -s $(which zsh)
 
 # install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
     echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 # check if MesloLGS NF is installed
@@ -109,3 +108,5 @@ stow -v -t $HOME git
 stow -v -t $HOME zsh
 stow -v -t $HOME p10k
 stow -v -t $HOME/.config/nvim/lua/custom nvim
+
+chsh -s $(which zsh)

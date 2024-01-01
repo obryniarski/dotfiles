@@ -105,11 +105,11 @@ if test ! $(which stow); then
   echo $sudoPW | sudo -S apt-get -y install stow
 fi
 
-# clear/backup existing dotfiles
+# clear existing dotfiles
 mv $HOME/.gitconfig $HOME/.gitconfig.old
 mv $HOME/.zshrc $HOME/.zshrc.old
 mv $HOME/.p10k.zsh $HOME/.p10k.zsh.old
-mv $HOME/.config/nvim/lua/custom $HOME/.config/nvim/lua/custom.old
+rm -rf $HOME/.config/nvim/lua/custom/*
 
 # stow dotfiles
 stow -v -t $HOME git

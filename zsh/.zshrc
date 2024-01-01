@@ -21,10 +21,12 @@ source $ZSH/oh-my-zsh.sh
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LS_COLORS="$(vivid generate one-dark)"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 # New Terminial Init (placed in .gitignore, custom for each pc)
-if [ -f $DOTFILES/startup.sh ]; then
-  source $DOTFILES/startup.sh
+if [ -f $DOTFILES/custom_startup.sh ]; then
+  source $DOTFILES/custom_startup.sh
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

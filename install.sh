@@ -68,6 +68,13 @@ if test ! $(which fd); then
   rm fd-musl_9.0.0_amd64.deb
 fi
 
+if test ! $(which delta); then
+  echo "Installing delta"
+  wget https://github.com/dandavison/delta/releases/download/0.16.5/git-delta_0.16.5_amd64.deb
+  echo $sudoPW | sudo -S dpkg -i git-delta_0.16.5_amd64.deb
+  rm git-delta_0.16.5_amd64.deb
+fi
+
 if test ! $(which vivid); then
   echo "Installing vivid"
   wget https://github.com/sharkdp/vivid/releases/download/v0.8.0/vivid_0.8.0_amd64.deb
@@ -105,7 +112,7 @@ if test ! $(which stow); then
   echo $sudoPW | sudo -S apt-get -y install stow
 fi
 
-# clear existing dotfiles
+# clear/backup existing dotfiles
 mv $HOME/.gitconfig $HOME/.gitconfig.old
 mv $HOME/.zshrc $HOME/.zshrc.old
 mv $HOME/.p10k.zsh $HOME/.p10k.zsh.old

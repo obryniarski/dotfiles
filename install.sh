@@ -82,6 +82,11 @@ if test ! $(which vivid); then
   rm vivid_0.8.0_amd64.deb
 fi
 
+if test ! $(which eza) && test $(which cargo); then
+  echo "Installing eza"
+  cargo install eza
+fi
+
 # install node (required for copilot in neovim)
 if test ! $(which node); then
   echo $sudoPW | sudo -S apt-get install -y ca-certificates gnupg

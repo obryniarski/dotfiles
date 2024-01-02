@@ -25,8 +25,8 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 # New Terminial Init (placed in .gitignore, custom for each pc)
-if [ -f $DOTFILES/custom_startup.sh ]; then
-  source $DOTFILES/custom_startup.sh
+if [ -f $DOTFILES/startup.sh ]; then
+  source $DOTFILES/startup.sh
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

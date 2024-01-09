@@ -48,6 +48,7 @@ local plugins = {
         "toml",
         "typescript",
         "yaml",
+        "vimdoc"
       },
     }
   },

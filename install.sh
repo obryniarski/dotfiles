@@ -87,9 +87,18 @@ if test ! $(which eza) && test $(which cargo); then
   cargo install eza
 fi
 
-if test ! $(which atuin) && test $(which cargo); then
+if test ! $(which atuin); then
   echo "Installing atuin"
   bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
+fi
+
+if test ! $(which lazygit); then
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf lazygit.tar.gz lazygit
+  echo $sudoPW | sudo -S install lazygit /usr/local/bin
+  rm lazygit
+  rm lazygit.tar.gz
 fi
 
 # install node (required for copilot in neovim)

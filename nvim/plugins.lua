@@ -59,8 +59,8 @@ local plugins = {
       ensure_installed = {
         "lua-language-server",
         "pyright",
-        "ruff",
         "rust-analyzer",
+        "ruff"
       },
     },
   },
@@ -72,6 +72,52 @@ local plugins = {
         require "custom.configs.lspconfig"
      end,
   },
+
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      { "nvim-treesitter/nvim-treesitter" },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      }
+    },
+    opts = function()
+      return require "custom.configs.telescope"
+    end,
+  },
+
+  {
+    "stevearc/conform.nvim",
+    config = function()
+      require "custom.configs.conform"
+    end,
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    lazy = false,
+    config = function ()
+      require "custom.configs.treesittercontext"
+    end
+  },
+
+  {
+    "sindrets/diffview.nvim",
+    keys = {
+      { "d", mode = "n", desc = "Open diffview" },
+    },
+    init = function ()
+      require("core.utils").load_mappings "diffview"
+    end,
+    opts = {
+      view = {
+        merge_tool = {
+          layout = "diff4_mixed"
+        }
+      }
+    }
+  }
 
 }
 

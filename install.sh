@@ -87,6 +87,11 @@ if test ! $(which eza) && test $(which cargo); then
   cargo install eza
 fi
 
+if test ! $(which atuin) && test $(which cargo); then
+  echo "Installing atuin"
+  bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
+fi
+
 # install node (required for copilot in neovim)
 if test ! $(which node); then
   echo $sudoPW | sudo -S apt-get install -y ca-certificates gnupg

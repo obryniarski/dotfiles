@@ -1,31 +1,51 @@
 local plugins = {
 
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   event = "InsertEnter",
-  --   opts = function()
-  --     return require "custom.configs.copilot"
-  --   end,
-  --   config = function(_, opts)
-  --     require("copilot").setup(opts)
-  --
-  --   vim.keymap.set("i", '<Tab>', function()
-  --     if require("copilot.suggestion").is_visible() then
-  --       require("copilot.suggestion").accept()
-  --     else
-  --       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
-  --     end
-  --   end, {
-  --     silent = true,
-  --   })
-  --   end,
-  --
-  -- },
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    config = function (_)
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end
 
-  -- {
-  --   "NvChad/nvim-cmp",
-  --   enabled = false,
-  -- },
+
+    -- opts = function()
+      -- return require "custom.configs.copilot"
+    -- end,
+    -- config = function(_, opts)
+    --   require("copilot").setup(opts)
+    --
+    -- vim.keymap.set("i", '<Tab>', function()
+    --   if require("copilot.suggestion").is_visible() then
+    --     require("copilot.suggestion").accept()
+    --   else
+    --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+    --   end
+    -- end, {
+    --   silent = true,
+    -- })
+    -- end,
+  },
+
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  },
+
+  {
+    "NvChad/nvim-cmp",
+    opts = function()
+      return require "custom.configs.cmp"
+    end,
+    config = function(_, opts)
+      require("cmp").setup(opts)
+    end,
+
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",

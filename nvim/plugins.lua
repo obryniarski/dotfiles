@@ -37,7 +37,7 @@ local plugins = {
   },
 
   {
-    "NvChad/nvim-cmp",
+    "hrsh7th/nvim-cmp",
     opts = function()
       return require "custom.configs.cmp"
     end,

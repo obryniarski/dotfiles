@@ -1,6 +1,6 @@
 vim.opt.relativenumber = true
 
-
+vim.g.python_recommended_style = 0
 
 vim.g.user = {
   leaderkey = ' ',

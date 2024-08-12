@@ -9,7 +9,7 @@ end
 
 
 configs.sources = {
-    { name = "copilot" },
+    -- { name = "copilot" },
     { name = "nvim_lsp" },
     { name = "luasnip" },
     { name = "buffer" },
@@ -20,7 +20,7 @@ configs.sources = {
 configs.sorting = {
     priority_weight = 2,
     comparators = {
-      require("copilot_cmp.comparators").prioritize,
+      -- require("copilot_cmp.comparators").prioritize,
 
       -- Below is the default comparitor list and order for nvim-cmp
       cmp.config.compare.offset,

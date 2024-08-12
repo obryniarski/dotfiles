@@ -92,6 +92,12 @@ if test ! $(which atuin); then
   bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
 fi
 
+if test ! $(which fzf); then
+  echo "Installing fzf"
+  git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
+  source $HOME/.fzf/install
+fi
+
 if test ! $(which lazygit); then
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
   curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"

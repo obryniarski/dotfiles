@@ -1,10 +1,10 @@
 local options = {
   panel = {
-    enabled = true,
+    enabled = false,
     auto_refresh = true
   },
   suggestion = {
-    enabled = true,
+    enabled = false,
     auto_trigger = true,
     accept = false,
   }

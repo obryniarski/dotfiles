@@ -1,14 +1,14 @@
 local plugins = {
 
-  {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    config = function (_)
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "InsertEnter",
+  --   config = function (_)
+  --     require("copilot").setup({
+  --       suggestion = { enabled = false },
+  --       panel = { enabled = false },
+  --     })
+  --   end
 
 
     -- opts = function()
@@ -27,14 +27,14 @@ local plugins = {
     --   silent = true,
     -- })
     -- end,
-  },
+  -- },
 
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function ()
-      require("copilot_cmp").setup()
-    end
-  },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   config = function ()
+  --     require("copilot_cmp").setup()
+  --   end
+  -- },
 
   {
     "hrsh7th/nvim-cmp",
@@ -80,7 +80,6 @@ local plugins = {
         "lua-language-server",
         "pyright",
         "rust-analyzer",
-        "ruff"
       },
     },
   },
@@ -139,13 +138,15 @@ local plugins = {
     }
   },
 
-  -- install without yarn or npm
-{
+  {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
     ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
-},
+  },
 
 }
 

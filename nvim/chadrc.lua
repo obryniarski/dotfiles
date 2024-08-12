@@ -1,12 +1,17 @@
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = { 
+M.ui = {
   theme = 'gruvchad',
   nvdash = {
     load_on_startup = true
   },
-  transparency = true
+  transparency = true,
+
+  statusline = {
+    theme="default",
+    separator_style="default",
+  },
 }
 M.plugins = "custom.plugins"
 

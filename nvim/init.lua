@@ -1,4 +1,5 @@
 vim.opt.relativenumber = true
+vim.opt.scrolloff = 5
 
 vim.g.python_recommended_style = 0
 

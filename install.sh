@@ -148,5 +148,7 @@ stow -v -t $HOME git
 stow -v -t $HOME zsh
 stow -v -t $HOME p10k
 stow -v -t $HOME/.config/nvim/lua/custom nvim
+stow -v -t $HOME tmux
+stow -v -t $HOME/.config/kitty kitty
 
 chsh -s $(which zsh)

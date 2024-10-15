@@ -150,5 +150,6 @@ stow -v -t $HOME p10k
 stow -v -t $HOME/.config/nvim/lua/custom nvim
 stow -v -t $HOME tmux
 stow -v -t $HOME/.config/kitty kitty
+stow -v -t $HOME/.config/tmux-powerline tmux-powerline
 
 chsh -s $(which zsh)

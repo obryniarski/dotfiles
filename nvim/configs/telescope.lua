@@ -23,4 +23,13 @@ configs.defaults.mappings = {
   i = { ['<CR>'] = select_one_or_multi },
 }
 
+configs.defaults.file_ignore_patterns = { ".git/", "%.png", "%.jpg", "%.jpeg" }
+
+configs.pickers = {
+  find_files = {
+    hidden = true, -- show hidden files
+    no_ignore = false, -- but exclude files in .gitignore
+  }
+}
+
 return configs

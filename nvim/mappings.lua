@@ -10,6 +10,7 @@ M.general = {
 		["<leader>fm"] = {
 			function()
 				require("conform").format({ async = true })
+				vim.cmd("write")
 			end,
 			"Format buffer (Conform)",
 		},

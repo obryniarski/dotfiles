@@ -6,16 +6,29 @@ read -s -p "Enter password for echo sudo: " sudoPW
 echo $sudoPW | sudo -S apt-get update
 echo $sudoPW | sudo -S apt-get -y install curl libfuse2
 
+if test ! $(which cargo); then
+  echo "Installing rust"
+  curl https://sh.rustup.rs -sSf | sh
+fi
+
+if test ! $(which go); then
+  echo "Installing go"
+  curl -OL https://go.dev/dl/go1.23.2.linux-amd64.tar.gz
+  echo $sudoPW | sudo rm -rf /usr/local/go
+  echo $sudoPW | sudo tar -C /usr/local -xzf go1.23.2.linux-amd64.tar.gz
+  echo $sudoPW | sudo rm -rf go1.23.2.linux-amd64.tar.gz
+fi
+
 # install zsh
 if test ! $(which zsh); then
-    echo "Installing zsh"
-    echo $sudoPW | sudo -S apt -y install zsh
+  echo "Installing zsh"
+  echo $sudoPW | sudo -S apt -y install zsh
 fi
 
 # install oh-my-zsh
 if [ ! -d $HOME/.oh-my-zsh ]; then
-    echo "Installing oh-my-zsh"
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  echo "Installing oh-my-zsh"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
 # check if MesloLGS NF is installed
@@ -119,10 +132,10 @@ fi
 
 # nvim installation / setup
 if test ! $(which nvim); then
-    echo "Installing nvim"
-    wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-    echo $sudoPW | sudo -S mv nvim.appimage /usr/local/bin/nvim
-    chmod +x /usr/local/bin/nvim
+  echo "Installing nvim"
+  wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+  echo $sudoPW | sudo -S mv nvim.appimage /usr/local/bin/nvim
+  chmod +x /usr/local/bin/nvim
 fi
 
 # nvchad nvim setup
@@ -130,6 +143,21 @@ if [ ! -d $HOME/.config/nvim ]; then
   echo "Installing nvchad"
   git clone https://github.com/NvChad/NvChad $HOME/.config/nvim --depth 1
   mkdir $HOME/.config/nvim/lua/custom
+fi
+
+if test ! $(which stylua); then
+  echo "Installing stylua formatter"
+  cargo install stylua
+fi
+
+if test ! $(which rustfmt); then
+  echo "Installing rustfmt formatter"
+  rustup component add rustfmt
+fi
+
+if test ! $(which shfmt); then
+  echo "Installing shfmt formatter"
+  go install mvdan.cc/sh/v3/cmd/shfmt@latest
 fi
 
 if test ! $(which stow); then

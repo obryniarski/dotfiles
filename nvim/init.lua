@@ -33,3 +33,11 @@ vim.api.nvim_create_autocmd('BufReadPost', {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = 'copilot-*',
+    callback = function()
+        vim.opt_local.relativenumber = true
+        vim.opt_local.number = true
+    end
+})

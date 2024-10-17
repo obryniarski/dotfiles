@@ -1,13 +1,29 @@
 local options = {
-  lsp_fallback = true,
+	-- Set default options
+	default_format_opts = {
+		lsp_format = "fallback",
+	},
 
-  formatters_by_ft = {
-    lua = { "stylua" },
+	-- format_on_save = { timeout_ms = 500 },
 
-    rust = { "rustfmt" },
+	formatters_by_ft = {
+		python = { "isort", "ruff_format" },
 
-    sh = { "shfmt" }
-  }
+		lua = { "stylua" },
+
+		rust = { "rustfmt" },
+
+		sh = { "shfmt" },
+	},
+
+	formatters = {
+		shfmt = {
+			prepend_args = { "-ln", "bash" },
+		},
+		isort = {
+			prepend_args = { "--sl" },
+		},
+	},
 }
 
 require("conform").setup(options)

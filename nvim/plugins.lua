@@ -3,12 +3,6 @@ local plugins = {
 	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
-		-- config = function (_)
-		--   require("copilot").setup({
-		--     suggestion = { enabled = false },
-		--     panel = { enabled = false },
-		--   })
-		-- end
 
 		opts = function()
 			return require("custom.configs.copilot")
@@ -156,9 +150,17 @@ local plugins = {
 				"lua-language-server",
 				"pyright",
 				"rust-analyzer",
+        "shfmt",
+        "rustfmt",
+        "isort",
+        "ruff"
 			},
 		},
 	},
+
+  {
+    "williamboman/mason-lspconfig.nvim",
+  },
 
 	{
 		"neovim/nvim-lspconfig",

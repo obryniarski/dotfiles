@@ -150,16 +150,6 @@ if test ! $(which stylua); then
   cargo install stylua
 fi
 
-if test ! $(which rustfmt); then
-  echo "Installing rustfmt formatter"
-  rustup component add rustfmt
-fi
-
-if test ! $(which shfmt); then
-  echo "Installing shfmt formatter"
-  go install mvdan.cc/sh/v3/cmd/shfmt@latest
-fi
-
 if test ! $(which stow); then
   echo "Installing stow"
   echo $sudoPW | sudo -S apt-get -y install stow

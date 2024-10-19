@@ -22,12 +22,12 @@ local plugins = {
 		end,
 	},
 
-	-- {
-	--   "zbirenbaum/copilot-cmp",
-	--   config = function ()
-	--     require("copilot_cmp").setup()
-	--   end
-	-- },
+	{
+	  "zbirenbaum/copilot-cmp",
+	  config = function ()
+	    require("copilot_cmp").setup()
+	  end
+	},
 
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",

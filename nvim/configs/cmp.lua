@@ -10,18 +10,18 @@ local has_words_before = function()
 end
 
 configs.sources = {
-	-- { name = "copilot" },
-	{ name = "nvim_lsp" },
-	{ name = "luasnip" },
-	{ name = "buffer" },
-	{ name = "nvim_lua" },
-	{ name = "path" },
+	{ name = "copilot", group_index = 2 },
+	{ name = "nvim_lsp", group_index = 2 },
+	{ name = "path", group_index = 2 },
+	{ name = "buffer", group_index = 2 },
+	-- { name = "luasnip", group_index = 2 },
+	-- { name = "nvim_lua", group_index = 2 },
 }
 
 configs.sorting = {
 	priority_weight = 2,
 	comparators = {
-		-- require("copilot_cmp.comparators").prioritize,
+		require("copilot_cmp.comparators").prioritize,
 
 		-- Below is the default comparitor list and order for nvim-cmp
 		cmp.config.compare.offset,
@@ -31,10 +31,9 @@ configs.sorting = {
 		cmp.config.compare.recently_used,
 		cmp.config.compare.locality,
 		cmp.config.compare.kind,
-		-- cmp.config.compare.sort_text,
-		-- cmp.config.compare.length,
-		-- cmp.config.compare.order,
-		-- require("copilot_cmp.comparators").prioritize,
+		cmp.config.compare.sort_text,
+		cmp.config.compare.length,
+		cmp.config.compare.order,
 	},
 }
 
@@ -46,23 +45,10 @@ configs.mapping = {
 	["<C-f>"] = cmp.mapping.scroll_docs(4),
 	["<C-Space>"] = cmp.mapping.complete(),
 	["<C-e>"] = cmp.mapping.close(),
-	["<CR>"] = cmp.mapping.confirm({
+	["<S-CR>"] = cmp.mapping.confirm({
 		behavior = cmp.ConfirmBehavior.Insert,
 		select = true,
 	}),
-	-- ["<Tab>"] = cmp.mapping(function(fallback)
-	--   if cmp.visible() then
-	--     cmp.select_next_item()
-	--   elseif require("luasnip").expand_or_jumpable() then
-	--     vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-	--   else
-	--     fallback()
-	--   end
-	-- end,
-	-- {
-	--   "i",
-	--   "s",
-	-- }),
 	["<Tab>"] = vim.schedule_wrap(function(fallback)
 		if cmp.visible() and has_words_before() then
 			cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
@@ -72,16 +58,11 @@ configs.mapping = {
 	end),
 	["<S-Tab>"] = cmp.mapping(function(fallback)
 		if cmp.visible() then
-			cmp.select_prev_item()
-		elseif require("luasnip").jumpable(-1) then
-			vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+			cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
 		else
 			fallback()
 		end
-	end, {
-		"i",
-		"s",
-	}),
+	end),
 }
 
 return configs

@@ -1,4 +1,5 @@
 vim.keymap.set("n", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.keymap.set({ "n", "i" }, "<S-CR>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " " -- Set the leader key to space
 
 vim.opt.relativenumber = true
@@ -16,6 +17,18 @@ vim.g.user = {
 }
 
 vim.api.nvim_create_augroup(vim.g.user.event, {})
+
+-- get copilot to work well with cmp
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+
+-- properly set up python version
+-- (if pyenv is installed, we're probably using it)
+if vim.fn.executable("pyenv") == 1 then
+	vim.cmd([[
+    let $PYENV_VERSION = system('pyenv version-name')
+  ]])
+end
 
 -- From vim defaults.vim
 -- ---

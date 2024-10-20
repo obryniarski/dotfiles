@@ -11,11 +11,25 @@ end
 
 configs.sources = {
 	{ name = "copilot", group_index = 2 },
+	{ name = "buffer", group_index = 2 },
 	{ name = "nvim_lsp", group_index = 2 },
 	{ name = "path", group_index = 2 },
-	{ name = "buffer", group_index = 2 },
 	-- { name = "luasnip", group_index = 2 },
 	-- { name = "nvim_lua", group_index = 2 },
+}
+
+-- copied from https://github.com/onsails/lspkind.nvim?tab=readme-ov-file#option-2-nvim-cmp
+local lspkind = require("lspkind")
+configs.formatting = {
+	format = function(entry, vim_item)
+		-- Use lspkind to get the symbol and kind
+		-- Append the source name in parentheses (except for copilot)
+		if entry.source.name ~= "copilot" then
+			vim_item = lspkind.cmp_format({ with_text = true, maxwidth = 50 })(entry, vim_item)
+			vim_item.menu = string.format(" [%s]", entry.source.name)
+		end
+		return vim_item
+	end,
 }
 
 configs.sorting = {
@@ -45,6 +59,8 @@ configs.mapping = {
 	["<C-f>"] = cmp.mapping.scroll_docs(4),
 	["<C-Space>"] = cmp.mapping.complete(),
 	["<C-e>"] = cmp.mapping.close(),
+	-- I think eventually I will want to change this to use the second layer
+	-- enter of my keyboard, but we'll see
 	["<S-CR>"] = cmp.mapping.confirm({
 		behavior = cmp.ConfirmBehavior.Insert,
 		select = true,

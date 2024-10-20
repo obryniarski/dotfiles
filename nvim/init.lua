@@ -5,6 +5,9 @@ vim.g.mapleader = " " -- Set the leader key to space
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
 
+-- cmp window height
+vim.opt.pumheight = 10
+
 vim.g.python_recommended_style = 0
 
 vim.g.user = {
@@ -25,8 +28,9 @@ vim.g.copilot_assume_mapped = true
 -- properly set up python version
 -- (if pyenv is installed, we're probably using it)
 if vim.fn.executable("pyenv") == 1 then
-	vim.cmd([[
-    let $PYENV_VERSION = system('pyenv version-name')
+  -- for some reason, this sometimes returns with a newline
+  vim.cmd([[
+    let $PYENV_VERSION = substitute(system('pyenv version-name'), '\n', '', '')
   ]])
 end
 

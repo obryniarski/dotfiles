@@ -23,10 +23,10 @@ local plugins = {
 	},
 
 	{
-	  "zbirenbaum/copilot-cmp",
-	  config = function ()
-	    require("copilot_cmp").setup()
-	  end
+		"zbirenbaum/copilot-cmp",
+		config = function()
+			require("copilot_cmp").setup()
+		end,
 	},
 
 	{
@@ -43,13 +43,40 @@ local plugins = {
 			--    end,
 			--    desc = "CopilotChat - Quick chat",
 			--  },
+      {
+        "cp",
+        mode = "v",
+        function()
+          local chat = require("CopilotChat")
+          -- Yank the selected text into the "v" register
+          vim.cmd('normal! "vy')
+          local selected_text = vim.fn.getreg('v')
+          vim.ui.input({ prompt = "Enter your question: " }, function(input)
+            if input then
+              -- chat.ask(input, { selection = require("CopilotChat.select").buffers })
+              local prompt = "Use this context for the following command:\n\n" .. selected_text .. "\n\nCommand:\n\n" .. input
+              chat.ask(prompt)
+            end
+          end)
+        end,
+        desc = "CopilotChat - Chat with selected text and buffers",
+      },
+
 			{
 				"<leader>cp",
 				function()
 					local chat = require("CopilotChat")
 					chat.reset()
-					-- chat.open({ selection = require("CopilotChat.select").buffers })
 					chat.open()
+				end,
+				desc = "CopilotChat - Quick chat",
+			},
+			{
+				"<leader>cp",
+				function()
+					local chat = require("CopilotChat")
+					chat.reset()
+					chat.open({ selection = require("CopilotChat.select").buffers })
 				end,
 				desc = "CopilotChat - Quick chat",
 			},
@@ -74,8 +101,8 @@ local plugins = {
 			context = "buffers",
 			window = {
 				layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'
-				width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
-				height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+				width = 0.7, -- fractional width of parent, or absolute width in columns when > 1
+				height = 0.7, -- fractional height of parent, or absolute height in rows when > 1
 				-- Options below only apply to floating windows
 				relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
 				border = "single", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
@@ -100,6 +127,10 @@ local plugins = {
 	},
 
 	{
+		"onsails/lspkind.nvim",
+	},
+
+	{
 		"christoomey/vim-tmux-navigator",
 		lazy = false,
 	},
@@ -113,6 +144,18 @@ local plugins = {
 				-- Configuration here, or leave empty to use defaults
 			})
 		end,
+	},
+
+	{
+		"hedyhli/outline.nvim",
+		lazy = true,
+		cmd = { "Outline", "OutlineOpen" },
+		keys = { -- Example mapping to toggle outline
+			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+		},
+		opts = {
+			auto_jump = true,
+		},
 	},
 
 	{
@@ -140,7 +183,45 @@ local plugins = {
 				"markdown",
 				"diff",
 			},
+
+			textobjects = {
+				select = {
+					enable = true,
+
+					-- Automatically jump forward to textobj, similar to targets.vim
+					lookahead = true,
+
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+						["ac"] = "@class.outer",
+						-- You can optionally set descriptions to the mappings (used in the desc parameter of
+						-- nvim_buf_set_keymap) which plugins like which-key display
+						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+						-- You can also use captures from other query groups like `locals.scm`
+						["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+					},
+					-- You can choose the select mode (default is charwise 'v')
+					--
+					-- mapping query_strings to modes.
+					selection_modes = {
+						["@parameter.outer"] = "v", -- charwise
+						["@function.outer"] = "V", -- linewise
+						["@class.outer"] = "V", -- linewise
+					},
+
+					include_surrounding_whitespace = true,
+				},
+			},
 		},
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+	},
+
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
 	},
 
 	{
@@ -150,17 +231,18 @@ local plugins = {
 				"lua-language-server",
 				"pyright",
 				"rust-analyzer",
-        "shfmt",
-        "rustfmt",
-        "isort",
-        "ruff"
+				"shfmt",
+				"rustfmt",
+				"isort",
+				"ruff",
+        "mypy",
 			},
 		},
 	},
 
-  {
-    "williamboman/mason-lspconfig.nvim",
-  },
+	{
+		"williamboman/mason-lspconfig.nvim",
+	},
 
 	{
 		"neovim/nvim-lspconfig",
@@ -168,6 +250,10 @@ local plugins = {
 			require("plugins.configs.lspconfig")
 			require("custom.configs.lspconfig")
 		end,
+	},
+
+	{
+		"hrsh7th/cmp-nvim-lsp",
 	},
 
 	{
@@ -199,6 +285,12 @@ local plugins = {
 		config = function()
 			require("custom.configs.treesittercontext")
 		end,
+	},
+
+	-- disable autopairs, I don't like it
+	{
+		"windwp/nvim-autopairs",
+		enabled = false,
 	},
 
 	{
@@ -262,6 +354,28 @@ local plugins = {
 			"RainbowDelimQuoted",
 			"RainbowMultiDelim",
 		},
+	},
+
+	-- movement
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- labels = "asdfghjklqwertyuiopzxcvbnm",
+			labels = "nrtsgyhaei", -- updated based on my graphite keyboard layout
+			highlight = {
+				backdrop = false,
+				groups = { backdrop = "" },
+			},
+		},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter( { labels = "nrtsgyhaei" }) end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
 	},
 }
 

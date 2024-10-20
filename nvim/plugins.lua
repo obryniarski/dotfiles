@@ -48,7 +48,7 @@ local plugins = {
 				mode = "v",
 				function()
 					local chat = require("CopilotChat")
-          chat.reset()
+					chat.reset()
 					-- Yank the selected text into the "v" register
 					vim.cmd('normal! "vy')
 					local selected_text = vim.fn.getreg("v")
@@ -101,7 +101,7 @@ local plugins = {
 		build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
 			debug = false, -- Enable debugging
-      temperature = 0.3,
+			temperature = 0.3,
 			clear_chat_on_new_prompt = false,
 			context = "buffers",
 			window = {
@@ -117,7 +117,6 @@ local plugins = {
 				footer = nil, -- footer of chat window
 				zindex = 1, -- determines if window is on top or below other floating windows
 			},
-
 		},
 	},
 

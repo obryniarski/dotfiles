@@ -43,24 +43,28 @@ local plugins = {
 			--    end,
 			--    desc = "CopilotChat - Quick chat",
 			--  },
-      {
-        "cp",
-        mode = "v",
-        function()
-          local chat = require("CopilotChat")
-          -- Yank the selected text into the "v" register
-          vim.cmd('normal! "vy')
-          local selected_text = vim.fn.getreg('v')
-          vim.ui.input({ prompt = "Enter your question: " }, function(input)
-            if input then
-              -- chat.ask(input, { selection = require("CopilotChat.select").buffers })
-              local prompt = "Use this context for the following command:\n\n" .. selected_text .. "\n\nCommand:\n\n" .. input
-              chat.ask(prompt)
-            end
-          end)
-        end,
-        desc = "CopilotChat - Chat with selected text and buffers",
-      },
+			{
+				"cp",
+				mode = "v",
+				function()
+					local chat = require("CopilotChat")
+          chat.reset()
+					-- Yank the selected text into the "v" register
+					vim.cmd('normal! "vy')
+					local selected_text = vim.fn.getreg("v")
+					vim.ui.input({ prompt = "Enter your question: " }, function(input)
+						if input then
+							-- chat.ask(input, { selection = require("CopilotChat.select").buffers })
+							local prompt = "Use this context for the following command:\n\n"
+								.. selected_text
+								.. "\n\nCommand:\n\n"
+								.. input
+							chat.ask(prompt)
+						end
+					end)
+				end,
+				desc = "CopilotChat - Chat with selected text and buffers",
+			},
 
 			{
 				"<leader>cp",
@@ -97,6 +101,7 @@ local plugins = {
 		build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
 			debug = false, -- Enable debugging
+      temperature = 0.3,
 			clear_chat_on_new_prompt = false,
 			context = "buffers",
 			window = {
@@ -105,15 +110,15 @@ local plugins = {
 				height = 0.7, -- fractional height of parent, or absolute height in rows when > 1
 				-- Options below only apply to floating windows
 				relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
-				border = "single", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+				border = "rounded", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
 				row = nil, -- row position of the window, default is centered
 				col = nil, -- column position of the window, default is centered
-				title = "Copilot Chat", -- title of chat window
+				title = "ai bullshit", -- title of chat window
 				footer = nil, -- footer of chat window
 				zindex = 1, -- determines if window is on top or below other floating windows
 			},
+
 		},
-		-- See Commands section for default commands if you want to lazy load on them
 	},
 
 	{
@@ -235,7 +240,6 @@ local plugins = {
 				"rustfmt",
 				"isort",
 				"ruff",
-        "mypy",
 			},
 		},
 	},

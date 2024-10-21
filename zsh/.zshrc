@@ -34,3 +34,5 @@ fi
 
 
 eval "$(atuin init zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

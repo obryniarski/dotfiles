@@ -1,6 +1,7 @@
 #!/bin/bash
-
 read -s -p "Enter password for echo sudo: " sudoPW
+
+set -e
 
 # install required packages
 echo $sudoPW | sudo -S apt-get update
@@ -105,7 +106,7 @@ if test ! $(which atuin); then
   bash <(curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh)
 fi
 
-if test ! $(which fzf); then
+if test ! $(which fzf) && [ ! -d "$HOME/.fzf" ]; then
   echo "Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
   source $HOME/.fzf/install
@@ -145,6 +146,11 @@ if [ ! -d $HOME/.config/nvim ]; then
   mkdir $HOME/.config/nvim/lua/custom
 fi
 
+if [ ! -d $HOME/.tmux/plugins/tpm ]; then
+  echo "Installing tmux plugin manager"
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 if test ! $(which stylua); then
   echo "Installing stylua formatter"
   cargo install stylua
@@ -156,10 +162,13 @@ if test ! $(which stow); then
 fi
 
 # clear/backup existing dotfiles
-mv $HOME/.gitconfig $HOME/.gitconfig.old
-mv $HOME/.zshrc $HOME/.zshrc.old
-mv $HOME/.p10k.zsh $HOME/.p10k.zsh.old
-rm -rf $HOME/.config/nvim/lua/custom/*
+[ -f "$HOME/.gitconfig" ] && mv $HOME/.gitconfig $HOME/.gitconfig.old
+[ -f "$HOME/.zshrc" ] && mv $HOME/.zshrc $HOME/.zshrc.old
+[ -f "$HOME/.p10k.zsh" ] && mv $HOME/.p10k.zsh $HOME/.p10k.zsh.old
+[ -f "$HOME/.tmux.conf" ] && mv $HOME/.tmux.conf $HOME/.tmux.conf.old
+[ -f "$HOME/.config/kitty/kitty.conf" ] && mv $HOME/.config/kitty/kitty.conf $HOME/.config/kitty/kitty.conf.old
+[ -f "$HOME/.config/tmux-powerline" ] && mv $HOME/.config/tmux-powerline $HOME/.config/tmux-powerline.old
+[ -d "$HOME/.config/nvim/lua/custom" ] && rm -rf $HOME/.config/nvim/lua/custom/*
 
 # stow dotfiles
 stow -v -t $HOME git
@@ -167,6 +176,7 @@ stow -v -t $HOME zsh
 stow -v -t $HOME p10k
 stow -v -t $HOME/.config/nvim/lua/custom nvim
 stow -v -t $HOME tmux
+source $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
 stow -v -t $HOME/.config/kitty kitty
 stow -v -t $HOME/.config/tmux-powerline tmux-powerline
 

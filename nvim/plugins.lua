@@ -151,18 +151,6 @@ local plugins = {
 	},
 
 	{
-		"hedyhli/outline.nvim",
-		lazy = true,
-		cmd = { "Outline", "OutlineOpen" },
-		keys = { -- Example mapping to toggle outline
-			{ "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
-		},
-		opts = {
-			auto_jump = true,
-		},
-	},
-
-	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
 			ensure_installed = {
@@ -190,16 +178,9 @@ local plugins = {
 
 			textobjects = {
 
+				-- keymaps are defined in init.lua
 				swap = {
 					enable = true,
-					swap_next = {
-						["<leader>sp"] = "@parameter.inner",
-						["<leader>sf"] = "@function.outer",
-					},
-					swap_previous = {
-						["<leader>sP"] = "@parameter.inner",
-						["<leader>sF"] = "@function.outer",
-					},
 				},
 
 				select = {
@@ -302,6 +283,38 @@ local plugins = {
 	{
 		"windwp/nvim-autopairs",
 		enabled = false,
+	},
+
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			messages = {
+				enabled = false,
+			},
+			notify = {
+				enabled = false,
+			},
+			views = {
+				cmdline_popup = {
+					position = {
+						row = "95%", -- Adjust the row position (use percentage or absolute values)
+						col = "50%", -- Adjust the column position (use percentage or absolute values)
+					},
+					size = {
+						width = 40, -- Set the width of the popup
+						height = "auto", -- Set the height (or you can provide a specific number)
+					},
+					border = {
+						style = "rounded", -- Optional: set a border style (e.g., "rounded", "double", "none")
+					},
+				},
+			},
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+		},
 	},
 
 	{

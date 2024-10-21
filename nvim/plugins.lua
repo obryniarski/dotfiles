@@ -302,11 +302,15 @@ local plugins = {
 						col = "50%", -- Adjust the column position (use percentage or absolute values)
 					},
 					size = {
-						width = 40, -- Set the width of the popup
+						width = 60, -- Set the width of the popup
 						height = "auto", -- Set the height (or you can provide a specific number)
 					},
 					border = {
 						style = "rounded", -- Optional: set a border style (e.g., "rounded", "double", "none")
+					},
+					win_options = {
+						wrap = true, -- Enable wrapping
+						scrolloff = 0, -- Disable scroll offset to see the newest text
 					},
 				},
 			},

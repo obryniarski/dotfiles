@@ -112,6 +112,17 @@ if test ! $(which fzf) && [ ! -d "$HOME/.fzf" ]; then
   source $HOME/.fzf/install
 fi
 
+if test ! $(which btop); then
+  # uninstall with sudo make uninstall
+  wget https://github.com/aristocratos/btop/releases/download/v1.4.0/btop-x86_64-linux-musl.tbz
+  tar -xf btop-x86_64-linux-musl.tbz
+  cd btop
+  echo $sudoPW | sudo make install
+  cd ..
+  rm btop-x86_64-linux-musl.tbz
+  rm -r btop
+fi
+
 if test ! $(which lazygit); then
   LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
   curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"

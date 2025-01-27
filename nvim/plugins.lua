@@ -228,6 +228,7 @@ local plugins = {
 				"rustfmt",
 				"isort",
 				"ruff",
+        "json-lsp",
 			},
 		},
 	},

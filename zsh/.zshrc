@@ -13,6 +13,7 @@ ZSH_CUSTOM=$DOTFILES
 plugins=(
 	git
 	zsh-syntax-highlighting
+  poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -23,6 +24,19 @@ export LC_ALL=en_US.UTF-8
 export LS_COLORS="$(vivid generate one-dark)"
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+
+# setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# setup poetry
+export PATH="$HOME/.local/bin:$PATH"
+
+
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 # New Terminial Init (placed in .gitignore, custom for each pc)
 if [ -f $DOTFILES/startup.sh ]; then

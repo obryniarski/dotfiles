@@ -18,9 +18,9 @@ M.general = {
 }
 
 M.diffview = {
-	n = {
-		["df"] = { "<cmd>DiffviewOpen<CR>", "Open diffview" },
-	},
+	-- n = {
+	-- 	["df"] = { "<cmd>DiffviewOpen<CR>", "Open diffview" },
+	-- },
 }
 
 return M

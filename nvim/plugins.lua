@@ -295,6 +295,14 @@ local plugins = {
 			notify = {
 				enabled = false,
 			},
+      lsp = {
+        hover = {
+            enabled = false
+          },
+        signature = {
+          enabled = false
+        },
+      },
 			views = {
 				cmdline_popup = {
 					position = {
@@ -321,22 +329,22 @@ local plugins = {
 		},
 	},
 
-	{
-		"sindrets/diffview.nvim",
-		keys = {
-			{ "d", mode = "n", desc = "Open diffview" },
-		},
-		init = function()
-			require("core.utils").load_mappings("diffview")
-		end,
-		opts = {
-			view = {
-				merge_tool = {
-					layout = "diff4_mixed",
-				},
-			},
-		},
-	},
+	-- {
+	-- 	"sindrets/diffview.nvim",
+	-- 	keys = {
+	-- 		{ "d", mode = "n", desc = "Open diffview" },
+	-- 	},
+	-- 	init = function()
+	-- 		require("core.utils").load_mappings("diffview")
+	-- 	end,
+	-- 	opts = {
+	-- 		view = {
+	-- 			merge_tool = {
+	-- 				layout = "diff4_mixed",
+	-- 			},
+	-- 		},
+	-- 	},
+	-- },
 
 	-- adds <leader>gy command to copy current line github link
 	{

@@ -185,7 +185,7 @@ fi
 stow -v -t $HOME git
 stow -v -t $HOME zsh
 stow -v -t $HOME p10k
-stow -v -t $HOME/.config/nvim/lua/custom nvim
+stow -v -t $HOME/.config/nvim/lua nvim
 stow -v -t $HOME tmux
 source $HOME/.tmux/plugins/tpm/scripts/install_plugins.sh
 stow -v -t $HOME/.config/kitty kitty

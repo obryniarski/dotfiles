@@ -1,20 +1,103 @@
+-- This file needs to have same structure as nvconfig.lua
+-- https://github.com/NvChad/ui/blob/v3.0/lua/nvconfig.lua
+-- Please read that file to know all available options :(
+
 ---@type ChadrcConfig
 local M = {}
 
-M.ui = {
+M.base46 = {
 	theme = "gruvchad",
-	nvdash = {
-		load_on_startup = true,
-	},
-	transparency = true,
+	-- transparency = true,
+}
 
+M.nvdash = {
+	load_on_startup = true,
+  header = {
+      -- "                                                          ",
+      -- " .                o              + '             o        ",
+      -- "              *    '                                      ",
+      -- "    o              . *                       .  '       ' ",
+      -- "    . .   '      .     .           .            |        *",
+      -- "   _|_                     '    '              -+-    *   ",
+      -- "    |              *  |     .                '  |         ",
+      -- "o         .          -o-         '        .   . * o       ",
+      -- "  +                   |                  +    .-.   .  +  ",
+      -- "   '              '                      .   (   )    *   ",
+      -- "         .   '       o'           ++          `-'      +  ",
+      -- "      '     '           +             '  .    *           ",
+      -- "     *             .                  '                   ",
+      -- "    +          o .  .  +       '              ..          ",
+      -- "    .                              '               .      ",
+      -- "         *           *                                .  *",
+      -- "  '         o '         * .      '    o           +       ",
+      -- "                           o  *     .     .     +         ",
+      -- ".      .  '    .                       . o         .      ",
+      -- "                 +           '            o          + .  ",
+      -- " .        **   .  ' +                        .            ",
+      -- "                                                          ",
+      -- "                                                          ",
+      -- "                                                          ",
+
+      -- from https://www.asciiart.eu/ascii-night-sky-generator
+      "                                                                                        ",
+      "                                                                                        ",
+      "  |            +  .     +  .           .                .   .                          .",
+      " -o-  o                '         +                        *      *                .    '",
+      "  |              _|_  .                                        .+         *             ",
+      "           +      |           o++                 .        |   o           '            ",
+      "                   |   o          _|_    +       '    '  --o--    . '             +     ",
+      "    +            --o--    .        | .     +     '         | +                          ",
+      "  *     *          |      *  .                         .                   ..     '     ",
+      "         o  +                    o              + '            +           .         |  ",
+      "                                    .           '    *                    +        +-o- ",
+      "           .      +                        +   '    .                   _|_          |  ",
+      "         '                           *          '     .+                 |    .         ",
+      "          .             +  o                         '      '                     .    +",
+      "   +          ' ' .        ..       o                              |              .     ",
+      "     .                          +                |                -o-                   ",
+      "     + ' '''        o           *      '        -+-      '       + |             +      ",
+      "             o                         '         |                               * +..  ",
+      "        +          o              .               |         *         o     *           ",
+      "          o            +.                       --o-- +          .           '    o *   ",
+      "   .         *    .               *     *         |               +        o            ",
+      "                   '   +          *          '       .          .                       ",
+      "                             '                               .        |  .          +   ",
+      "     o   .  . '  +                   . .     *       +         .    - o -           |   ",
+      "          +                       .         * .          +    .   .   |   .       --o-- ",
+      "          +                 .                               '  .   '         .      |   ",
+      "  '                    '                                   .    _|_         +           ",
+      "      o  *           '                                           |                      ",
+      "                                 *         +'      '       .                          ' ",
+      "      .             .               *               .       |                *         o",
+      "                  .  .               |                 + + -o-             .            ",
+      "'                 *      +        .- o -   .                |                           ",
+      "                                     |        '                   .                .    ",
+      "                                            .           .          *               + + .",
+      "                                *             .                             '      ''   ",
+      "             *  |      .  +                . .   o    ' *               .               ",
+      "'             - o -    +                    .                                   | .     ",
+      "                | +                  ..          .            +       * *     --o--     ",
+      "             +        '                         .''  o                          |     . ",
+      "  '                .               . .           .  o              *      +   |         ",
+      "        .                .               *                    |        o     -o-    +   ",
+      "                +o       '  + +    o     .   +               -+-              |  .      ",
+      "               *     .               '                        |                        .",
+      "       +                      .    +                                           *      . ",
+      "      +    *            '     '      '       . '                                        ",
+      "      +        '       *   +               .   .   .'           +         +     .  .    ",
+      "     o  '      . '                .          '        .-.    '           o   .          ",
+      "   '                   +                           ' (   )              o     o     *   ",
+      " '                       .                            `-'         *    '                ",
+      "                                                                                        ",
+      "                                                                                        ",
+  }
+}
+
+M.ui = {
 	statusline = {
 		theme = "default",
 		separator_style = "default",
 	},
 }
-M.plugins = "custom.plugins"
-
-M.mappings = require("custom.mappings")
 
 return M

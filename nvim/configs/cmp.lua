@@ -1,5 +1,5 @@
 local cmp = require("cmp")
-local configs = require("plugins.configs.cmp")
+local configs = require("nvchad.configs.cmp")
 
 local has_words_before = function()
 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -14,8 +14,6 @@ configs.sources = {
 	{ name = "buffer", group_index = 2 },
 	{ name = "nvim_lsp", group_index = 2 },
 	{ name = "path", group_index = 2 },
-	-- { name = "luasnip", group_index = 2 },
-	-- { name = "nvim_lua", group_index = 2 },
 }
 
 -- copied from https://github.com/onsails/lspkind.nvim?tab=readme-ov-file#option-2-nvim-cmp

@@ -1,4 +1,4 @@
-local configs = require("plugins.configs.telescope")
+local configs = require("nvchad.configs.telescope")
 local telescope = require("telescope")
 telescope.load_extension("fzf")
 

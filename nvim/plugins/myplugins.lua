@@ -5,7 +5,7 @@ local plugins = {
 		event = "InsertEnter",
 
 		opts = function()
-			return require("custom.configs.copilot")
+			return require("configs.copilot")
 		end,
 		config = function(_, opts)
 			require("copilot").setup(opts)
@@ -92,8 +92,9 @@ local plugins = {
 				desc = "CopilotChat - Toggle window",
 			},
 		},
-
-		branch = "canary",
+    
+    -- this branch is deprecated, not sure why I had it before
+    -- branch = "canary",
 		dependencies = {
 			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -123,7 +124,7 @@ local plugins = {
 	{
 		"hrsh7th/nvim-cmp",
 		opts = function()
-			return require("custom.configs.cmp")
+			return require("configs.cmp")
 		end,
 		config = function(_, opts)
 			require("cmp").setup(opts)
@@ -240,8 +241,8 @@ local plugins = {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			require("plugins.configs.lspconfig")
-			require("custom.configs.lspconfig")
+			require("nvchad.configs.lspconfig")
+			require("configs.lspconfig")
 		end,
 	},
 
@@ -259,7 +260,7 @@ local plugins = {
 			},
 		},
 		opts = function()
-			return require("custom.configs.telescope")
+			return require("configs.telescope")
 		end,
 	},
 
@@ -268,7 +269,7 @@ local plugins = {
 		event = { "BufWritePre" },
 		cmd = { "ConformInfo" },
 		config = function()
-			require("custom.configs.conform")
+			require("configs.conform")
 		end,
 	},
 
@@ -276,7 +277,7 @@ local plugins = {
 		"nvim-treesitter/nvim-treesitter-context",
 		lazy = false,
 		config = function()
-			require("custom.configs.treesittercontext")
+			require("configs.treesittercontext")
 		end,
 	},
 

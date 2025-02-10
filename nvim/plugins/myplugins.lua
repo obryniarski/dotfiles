@@ -33,16 +33,6 @@ local plugins = {
 		"CopilotC-Nvim/CopilotChat.nvim",
 		lazy = false,
 		keys = {
-			-- {
-			--    "<leader>cp",
-			--    function()
-			--      local input = vim.fn.input("Quick Chat: ")
-			--      if input ~= "" then
-			--        require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-			--      end
-			--    end,
-			--    desc = "CopilotChat - Quick chat",
-			--  },
 			{
 				"cp",
 				mode = "v",
@@ -54,10 +44,7 @@ local plugins = {
 					local selected_text = vim.fn.getreg("v")
 					vim.ui.input({ prompt = "Enter your question: " }, function(input)
 						if input then
-							-- chat.ask(input, { selection = require("CopilotChat.select").buffers })
-							local prompt = "Use this context for the following command:\n\n"
-								.. selected_text
-								.. "\n\nCommand:\n\n"
+							local prompt = "Use the selected code as context for the following command/question:\n\n"
 								.. input
 							chat.ask(prompt)
 						end
@@ -75,15 +62,15 @@ local plugins = {
 				end,
 				desc = "CopilotChat - Quick chat",
 			},
-			{
-				"<leader>cp",
-				function()
-					local chat = require("CopilotChat")
-					chat.reset()
-					chat.open({ selection = require("CopilotChat.select").buffers })
-				end,
-				desc = "CopilotChat - Quick chat",
-			},
+			-- {
+			-- 	"<leader>cp",
+			-- 	function()
+			-- 		local chat = require("CopilotChat")
+			-- 		chat.reset()
+			-- 		chat.open({ selection = require("CopilotChat.select").buffers })
+			-- 	end,
+			-- 	desc = "CopilotChat - Quick chat",
+			-- },
 			{
 				"<leader>ct",
 				function()
@@ -92,9 +79,9 @@ local plugins = {
 				desc = "CopilotChat - Toggle window",
 			},
 		},
-    
-    -- this branch is deprecated, not sure why I had it before
-    -- branch = "canary",
+
+		-- this branch is deprecated, not sure why I had it before
+		-- branch = "canary",
 		dependencies = {
 			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
 			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -102,9 +89,9 @@ local plugins = {
 		build = "make tiktoken", -- Only on MacOS or Linux
 		opts = {
 			debug = false, -- Enable debugging
-			temperature = 0.3,
+			temperature = 0.1,
 			clear_chat_on_new_prompt = false,
-			context = "buffers",
+			context = { "buffers:listed" },
 			window = {
 				layout = "float", -- 'vertical', 'horizontal', 'float', 'replace'
 				width = 0.7, -- fractional width of parent, or absolute width in columns when > 1
@@ -229,7 +216,7 @@ local plugins = {
 				"rustfmt",
 				"isort",
 				"ruff",
-        "json-lsp",
+				"json-lsp",
 			},
 		},
 	},
@@ -297,14 +284,14 @@ local plugins = {
 			notify = {
 				enabled = false,
 			},
-      lsp = {
-        hover = {
-            enabled = false
-          },
-        signature = {
-          enabled = false
-        },
-      },
+			lsp = {
+				hover = {
+					enabled = false,
+				},
+				signature = {
+					enabled = false,
+				},
+			},
 			views = {
 				cmdline_popup = {
 					position = {

@@ -22,6 +22,10 @@ map("n", "<leader>fm", function()
 	vim.cmd("write")
 end, { desc = "Format buffer (Conform)" })
 
+
+-- extra telescope mappings
+map("n", "<leader>fs", "<cmd>Telescope treesitter<CR>", { desc = "telescope pick from treesitter symbols" })
+
 -- new nvchad defaults, not sure about these yet
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")

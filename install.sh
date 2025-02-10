@@ -82,11 +82,12 @@ if test ! $(which fd); then
   rm fd-musl_9.0.0_amd64.deb
 fi
 
-if test ! $(which delta); then
-  echo "Installing delta"
-  wget https://github.com/dandavison/delta/releases/download/0.16.5/git-delta_0.16.5_amd64.deb
-  echo $sudoPW | sudo -S dpkg -i git-delta_0.16.5_amd64.deb
-  rm git-delta_0.16.5_amd64.deb
+if test ! $(which difft); then
+  echo "Installing difftastic"
+  wget https://github.com/Wilfred/difftastic/releases/download/0.62.0/difft-x86_64-unknown-linux-gnu.tar.gz
+  tar -xf difft-x86_64-unknown-linux-gnu.tar.gz
+  echo $sudoPW | sudo -S mv difft /usr/local/bin
+  rm difft-x86_64-unknown-linux-gnu.tar.gz
 fi
 
 if test ! $(which vivid); then

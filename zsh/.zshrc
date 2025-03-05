@@ -13,7 +13,6 @@ ZSH_CUSTOM=$DOTFILES
 plugins=(
 	git
 	zsh-syntax-highlighting
-  poetry
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -25,17 +24,7 @@ export LS_COLORS="$(vivid generate one-dark)"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
-
-# setup pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# setup poetry
-export PATH="$HOME/.local/bin:$PATH"
-
-
+export PATH="$HOME/.cargo/bin:$PATH"
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 # New Terminial Init (placed in .gitignore, custom for each pc)
@@ -45,8 +34,5 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-eval "$(atuin init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -7,3 +7,9 @@
 [submodule "/home/oliver/.dotfiles/themes/powerlevel10k"]
 	path = /home/oliver/.dotfiles/themes/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
+[submodule "/home/oliver/.dotfiles/plugins/fzf-tab"]
+	path = /home/oliver/.dotfiles/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
+[submodule "/home/oliver/.dotfiles/plugins/zsh-autosuggestions"]
+	path = /home/oliver/.dotfiles/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions

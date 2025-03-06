@@ -6,7 +6,7 @@ set -e
 
 # Update and install required packages
 echo "$sudoPW" | sudo -S apt-get update
-echo "$sudoPW" | sudo -S apt-get -y install lbzip2 libfuse2 build-essential curl wget stow zsh tmux fonts-firacode 
+echo "$sudoPW" | sudo -S apt-get -y install lbzip2 libfuse2 build-essential curl wget tree stow zsh tmux fonts-firacode 
 
 # Install Rust (cargo) if not installed
 if ! command -v cargo &> /dev/null; then
@@ -103,7 +103,8 @@ fi
 if ! command -v fzf &> /dev/null && [ ! -d "$HOME/.fzf" ]; then
   echo "Installing fzf"
   git clone --depth 1 https://github.com/junegunn/fzf.git "$HOME/.fzf"
-  "$HOME/.fzf/install" --bin
+  "$HOME/.fzf/install" --all
+  export PATH="$HOME/.fzf/bin:$PATH"
 fi
 
 # Install btop if not installed
@@ -196,4 +197,4 @@ stow -v -t "$HOME/.config/tmux-powerline" tmux-powerline
 sudo usermod --shell "$(command -v zsh)" "$USER"
 
 # run nvim in headless state to install plugins
-nvim --headless -c 'Lazy sync' -c 'qa'
+nvim --headless -c 'Lazy install' -c 'qa'

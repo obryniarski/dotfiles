@@ -13,18 +13,18 @@ ZSH_CUSTOM=$DOTFILES
 plugins=(
 	git
 	zsh-syntax-highlighting
+  fzf-tab
 )
 
 source $ZSH/oh-my-zsh.sh
 
 
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 export LS_COLORS="$(vivid generate one-dark)"
 export EDITOR="nvim"
 export VISUAL="nvim"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.fzf/bin:$PATH"
 export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 # New Terminial Init (placed in .gitignore, custom for each pc)
@@ -36,3 +36,4 @@ fi
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+bindkey "${key[Up]}" fzf-history-widget

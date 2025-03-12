@@ -1,15 +1,12 @@
 [submodule "themes/powerlevel10k"]
-	path = themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
+        path = themes/powerlevel10k
+        url = https://github.com/romkatv/powerlevel10k.git
 [submodule "plugins/zsh-syntax-highlighting"]
-	path = plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "/home/oliver/.dotfiles/themes/powerlevel10k"]
-	path = /home/oliver/.dotfiles/themes/powerlevel10k
-	url = https://github.com/romkatv/powerlevel10k.git
-[submodule "/home/oliver/.dotfiles/plugins/fzf-tab"]
-	path = /home/oliver/.dotfiles/plugins/fzf-tab
-	url = https://github.com/Aloxaf/fzf-tab
-[submodule "/home/oliver/.dotfiles/plugins/zsh-autosuggestions"]
-	path = /home/oliver/.dotfiles/plugins/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
+        path = plugins/zsh-syntax-highlighting
+        url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "plugins/fzf-tab"]
+        path = plugins/fzf-tab
+        url = https://github.com/Aloxaf/fzf-tab
+[submodule "plugins/zsh-autosuggestions"]
+        path = plugins/zsh-autosuggestions
+        url = https://github.com/zsh-users/zsh-autosuggestions

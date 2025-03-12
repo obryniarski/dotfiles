@@ -37,3 +37,4 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 bindkey "${key[Up]}" fzf-history-widget
+

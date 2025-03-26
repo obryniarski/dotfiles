@@ -6,7 +6,22 @@ set -e
 
 # Update and install required packages
 echo "$sudoPW" | sudo -S apt-get update
-echo "$sudoPW" | sudo -S apt-get -y install lbzip2 libfuse2 build-essential curl wget tree stow zsh tmux fonts-firacode 
+echo "$sudoPW" | sudo -S apt-get -y install lbzip2 libfuse2 build-essential curl wget tree stow zsh tmux fontconfig
+
+# install recommended powershell10k font
+if [ ! -d /usr/share/fonts/MesloLGS ]; then
+  echo "Installing MesloLGS NF font (recommended for use with powerlevel10k)"
+  wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
+  wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf
+  wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf
+  wget https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
+
+  echo $sudoPW | sudo -S mkdir /usr/share/fonts/MesloLGS
+  echo $sudoPW | sudo -S mv *.ttf /usr/share/fonts/MesloLGS
+  fc-cache -f -v
+  rm -rf *Meslo*
+fi
+
 
 # Install Rust (cargo) if not installed
 if ! command -v cargo &> /dev/null; then
@@ -129,16 +144,21 @@ if ! command -v lazygit &> /dev/null; then
   rm lazygit lazygit.tar.gz
 fi
 
-# Install Node.js if not installed
-if ! command -v node &> /dev/null; then
-  echo "Installing node"
-  echo "$sudoPW" | sudo -S apt-get install -y ca-certificates gnupg
-  echo "$sudoPW" | sudo -S mkdir -p /etc/apt/keyrings
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-  echo "$sudoPW" | sudo -S apt-get update
-  echo "$sudoPW" | sudo -S apt-get install -y nodejs
+# Install / Upgrade Node.js 
+echo "Installing node"
+echo "$sudoPW" | sudo -S apt-get install -y ca-certificates gnupg
+echo "$sudoPW" | sudo -S mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+echo "$sudoPW" | sudo -S apt-get update
+echo "$sudoPW" | sudo -S apt-get install -y nodejs
+
+
+if ! command -v yarn &> /dev/null; then
+  echo "Installing yarn"
+  echo "$sudoPW" | sudo -S npm install -g yarn
 fi
+
 
 # Install nvim if not installed
 if ! command -v nvim &> /dev/null; then
@@ -194,7 +214,5 @@ stow -v -t "$HOME/.config/kitty" kitty
 stow -v -t "$HOME/.config/tmux-powerline" tmux-powerline
 
 # Change default shell to zsh
+echo "$USER"
 sudo usermod --shell "$(command -v zsh)" "$USER"
-
-# run nvim in headless state to install plugins
-nvim --headless -c 'Lazy install' -c 'qa'
